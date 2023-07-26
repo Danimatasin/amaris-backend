@@ -15,6 +15,7 @@ public class Employee {
 	    private int employeeAge;
 		@JsonProperty("profile_image")
 	    private String profileImage;
+		private BigDecimal annualSalary;
 		
 		public Employee() {
 		}
@@ -63,6 +64,14 @@ public class Employee {
 
 	    public void setProfileImage(String profileImage) {
 	        this.profileImage = profileImage;
+	    }
+	    
+	    public BigDecimal getAnnualSalary() {
+	        return annualSalary;
+	    }
+
+	    public void setAnnualSalary(BigDecimal annualSalary) {
+	        this.annualSalary = annualSalary;
 	    }
 
 }

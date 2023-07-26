@@ -19,23 +19,14 @@ public class EmployeeService {
     }
     
     public List<Employee> getAllEmployees() {
-        return employeeDAO.getAllEmployees();
-    }
-    
-    public Employee getEmployeeById(int employeeId) {
-        // Realizamos una validación para evitar buscar empleados con ID negativo.
-        if (employeeId <= 0) {
-            throw new IllegalArgumentException("El ID del empleado debe ser un número positivo.");
-        }
-        
-        Employee employee = employeeDAO.getEmployeeById(employeeId);
-        
-        // Si el empleado no existe, retornamos null.
-        if (employee == null) {
-            return null;
-        }
-        
-        return employee;
+        List<Employee> employees = employeeDAO.getAllEmployees();
+        // Calcular el salario anual y agregarlo a la lista de empleados
+        employees.forEach(employee -> {
+            BigDecimal monthlySalary = employee.getEmployeeSalary();
+            BigDecimal annualSalary = monthlySalary.multiply(new BigDecimal(12));
+            employee.setAnnualSalary(annualSalary);
+        });
+        return employees;
     }
     
     public BigDecimal calculateAnnualSalary(int employeeId) {
@@ -51,5 +42,22 @@ public class EmployeeService {
         
         BigDecimal monthlySalary = employee.getEmployeeSalary();
         return monthlySalary.multiply(new BigDecimal(12));
+    }
+    
+    public Employee getEmployeeById(int employeeId) {
+        // Realizamos una validación para evitar buscar empleados con ID negativo.
+        if (employeeId <= 0) {
+            throw new IllegalArgumentException("El ID del empleado debe ser un número positivo.");
+        }
+        
+        Employee employee = employeeDAO.getEmployeeById(employeeId);
+        BigDecimal annualSalary = employee.getEmployeeSalary().multiply(new BigDecimal(12));
+        employee.setAnnualSalary(annualSalary);
+        // Si el empleado no existe, retornamos null.
+        if (employee == null) {
+            return null;
+        }
+        
+        return employee;
     }
 }

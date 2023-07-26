@@ -36,8 +36,6 @@ public class BackendApplication implements WebMvcConfigurer {
     @Bean
     public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
-
-        // Agregar el MappingJackson2HttpMessageConverter al RestTemplate
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         messageConverters.add(new MappingJackson2HttpMessageConverter());
         restTemplate.setMessageConverters(messageConverters);
