@@ -4,6 +4,10 @@
   <artifactId>backend</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>springboot-backend</name>
+  <properties>
+	   <maven.compiler.source>1.8</maven.compiler.source>
+	   <maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
   
   <dependencies>
     <dependency>
@@ -46,4 +50,5 @@
 	    <version>2.12.4</version>
 	</dependency>
 </dependencies>
+<packaging>war</packaging>
 </project>
